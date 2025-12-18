@@ -27,10 +27,7 @@ SERVICE_META = {
     "page_subtitle": "Zähle OpenStreetMap-Bäume für einen Ort und liefere eine schnelle Übersicht.",
 }
 
-SERVICES = [
-    ("Tree Locator", "/"),
-    ("PLZ → Koordinaten", PLZ_URL),
-]
+
 
 # -----------------------------------------------------------------------------
 # External endpoints & policy-friendly defaults
@@ -733,31 +730,10 @@ HTML = r"""
 
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="{{ landing_url }}" aria-label="Landing">
+      <a class="brand" href="{{ landing_url }}" aria-label="Startseite">
         <span class="brand-mark" aria-hidden="true"></span>
         <span class="brand-text">data-tales.dev</span>
       </a>
-
-      <nav class="nav" aria-label="Hauptnavigation">
-        <a href="{{ landing_url }}">Landing</a>
-        <a href="{{ cookbook_url }}">Cookbook</a>
-
-        <div class="nav-dropdown" data-dropdown>
-          <button class="btn btn-ghost nav-dropbtn"
-                  type="button"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  aria-controls="servicesMenu">
-            Dienste <span class="nav-caret" aria-hidden="true">▾</span>
-          </button>
-
-          <div id="servicesMenu" class="card nav-menu" role="menu" hidden>
-            {% for name, url in services %}
-              <a role="menuitem" href="{{ url }}">{{ name }}</a>
-            {% endfor %}
-          </div>
-        </div>
-      </nav>
 
       <div class="header-actions">
         <button class="btn btn-ghost" id="themeToggle" type="button" aria-label="Theme umschalten">
@@ -939,37 +915,6 @@ HTML = r"""
       }
     })();
 
-    // Services dropdown
-    (function(){
-      const dd = document.querySelector("[data-dropdown]");
-      if(!dd) return;
-      const btn = dd.querySelector("button[aria-controls]");
-      const menu = dd.querySelector("#servicesMenu");
-      if(!btn || !menu) return;
-
-      function close(){
-        menu.hidden = true;
-        btn.setAttribute("aria-expanded","false");
-      }
-      function open(){
-        menu.hidden = false;
-        btn.setAttribute("aria-expanded","true");
-      }
-
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        if(menu.hidden) open(); else close();
-      });
-
-      document.addEventListener("click", (e) => {
-        if(!dd.contains(e.target)) close();
-      });
-
-      document.addEventListener("keydown", (e) => {
-        if(e.key === "Escape") close();
-      });
-    })();
-
     // Form conditional fields
     (function(){
       const qm = document.getElementById("query_mode");
@@ -1121,7 +1066,6 @@ def index() -> Response:
         meta=SERVICE_META,
         landing_url=LANDING_URL,
         cookbook_url=COOKBOOK_URL,
-        services=SERVICES,
         form=form,
         result=result,
         error=error,
@@ -1137,4 +1081,4 @@ def index() -> Response:
 if __name__ == "__main__":
     # Local dev only (Cloud Run uses gunicorn)
     port = int(os.environ.get("PORT", "8080"))
-    app.run(host="0.0.0.0", port=port, debug=False)
+    app.run(host="0.0.0.0", port=port, debug=True)
