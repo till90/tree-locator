@@ -591,7 +591,46 @@ HTML = r"""
     .nav a{color:var(--muted); text-decoration:none; font-weight:600}
     .nav a:hover{color:var(--text)}
     .header-actions{display:flex; gap:10px; align-items:center}
+    .header-note{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-weight: 750;
+      font-size: 12px;
+      line-height: 1;
+      white-space: nowrap;
+    }
 
+    [data-theme="light"] .header-note{
+      background: rgba(17,24,39,.03);
+    }
+
+    .header-note__label{
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: var(--muted);
+    }
+
+    .header-note__mail{
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 850;
+    }
+
+    .header-note__mail:hover{
+      text-decoration: underline;
+    }
+
+    /* Mobile: Label ausblenden, nur Mail zeigen */
+    @media (max-width: 720px){
+      .header-note__label{ display:none; }
+    }
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       gap:8px;
@@ -735,13 +774,18 @@ HTML = r"""
         <span class="brand-text">data-tales.dev</span>
       </a>
 
-      <div class="header-actions">
-        <button class="btn btn-ghost" id="themeToggle" type="button" aria-label="Theme umschalten">
-          <span aria-hidden="true">☾</span>
-          <span class="sr-only">Theme umschalten</span>
-        </button>
-        <a class="btn btn-primary" href="{{ landing_url }}#contact">Kontakt</a>
+    <div class="header-actions">
+      <div class="header-note" aria-label="Feedback Kontakt">
+        <span class="header-note__label">Änderung / Kritik:</span>
+        <a class="header-note__mail" href="mailto:infos@data-tales.dev">infos@data-tales.dev</a>
       </div>
+
+      <a class="btn btn-primary" href="{{ landing_url }}#contact">Kontakt</a>
+      <button class="btn btn-ghost" id="themeToggle" type="button" aria-label="Theme umschalten">
+        <span aria-hidden="true" id="themeIcon">☾</span>
+        <span class="sr-only">Theme umschalten</span>
+      </button>
+    </div>
     </div>
   </header>
 
