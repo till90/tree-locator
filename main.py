@@ -949,6 +949,49 @@ HTML = r"""
   ></script>
 
   <script>
+    (function(){
+    const dd = document.querySelector('[data-dropdown]');
+    if(!dd) return;
+
+    const btn = dd.querySelector('.nav-dropbtn');
+    const menu = dd.querySelector('.nav-menu');
+
+    function setOpen(isOpen){
+      btn.setAttribute('aria-expanded', String(isOpen));
+      if(isOpen){
+        menu.hidden = false;
+        dd.classList.add('open');
+      }else{
+        menu.hidden = true;
+        dd.classList.remove('open');
+      }
+    }
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      setOpen(!isOpen);
+    });
+
+    document.addEventListener('click', (e) => {
+      if(!dd.contains(e.target)) setOpen(false);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape') setOpen(false);
+    });
+
+    // Wenn per Tab aus dem Dropdown rausnavigiert wird: schließen
+    dd.addEventListener('focusout', () => {
+      requestAnimationFrame(() => {
+        if(!dd.contains(document.activeElement)) setOpen(false);
+      });
+    });
+
+    // Initial geschlossen
+    setOpen(false);
+  })();
     // Theme toggle (Landing-like)
     (function(){
       const key = "theme";
