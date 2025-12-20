@@ -769,23 +769,44 @@ HTML = r"""
 
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="{{ landing_url }}" aria-label="Startseite">
+      <a class="brand" href="{{ landing_url }}" aria-label="Zur Landing Page">
         <span class="brand-mark" aria-hidden="true"></span>
         <span class="brand-text">data-tales.dev</span>
       </a>
 
-    <div class="header-actions">
-      <div class="header-note" aria-label="Feedback Kontakt">
-        <span class="header-note__label">Änderung / Kritik:</span>
-        <a class="header-note__mail" href="mailto:infos@data-tales.dev">infos@data-tales.dev</a>
+      <div class="nav-dropdown" data-dropdown>
+          <button class="btn btn-ghost nav-dropbtn"
+                  type="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  aria-controls="servicesMenu">
+            Dienste <span class="nav-caret" aria-hidden="true">▾</span>
+          </button>
+
+          <div id="servicesMenu" class="card nav-menu" role="menu" hidden>
+            <a role="menuitem" href="https://flybi-demo.data-tales.dev/">Flybi Dashboard Demo</a>
+            <a role="menuitem" href="https://wms-wfs-sources.data-tales.dev/">WMS/WFS Server Viewer</a>
+            <a role="menuitem" href="https://tree-locator.data-tales.dev/">Tree Locator</a>
+            <a role="menuitem" href="https://plz.data-tales.dev/">PLZ → Koordinaten</a>
+            <a role="menuitem" href="https://paw-wiki.data-tales.dev/">Paw Patrole Wiki</a>
+            <a role="menuitem" href="https://paw-quiz.data-tales.dev/">Paw Patrole Quiz</a>
+            <a role="menuitem" href="https://hp-quiz.data-tales.dev/">Harry Potter Quiz</a>
+            <a role="menuitem" href="https://worm-attack-3000.data-tales.dev/">Wurm Attacke 3000</a>
+          </div>
       </div>
 
-      <a class="btn btn-primary" href="{{ landing_url }}#contact">Kontakt</a>
-      <button class="btn btn-ghost" id="themeToggle" type="button" aria-label="Theme umschalten">
-        <span aria-hidden="true" id="themeIcon">☾</span>
-        <span class="sr-only">Theme umschalten</span>
-      </button>
-    </div>
+      <div class="header-actions">
+        <div class="header-note" aria-label="Feedback Kontakt">
+          <span class="header-note__label">Änderung / Kritik:</span>
+          <a class="header-note__mail" href="mailto:info@data-tales.dev">info@data-tales.dev</a>
+        </div>
+
+        
+        <button class="btn btn-ghost" id="themeToggle" type="button" aria-label="Theme umschalten">
+          <span aria-hidden="true" id="themeIcon">☾</span>
+          <span class="sr-only">Theme umschalten</span>
+        </button>
+      </div>
     </div>
   </header>
 
