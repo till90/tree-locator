@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""
+API:
+- GET /healthz      -> Überprüft den Zustand des Dienstes
+- GET /api          -> Führt eine Baumsuche durch und gibt die Ergebnisse als JSON zurück
+- GET /api/geojson  -> Führt eine Baumsuche durch und gibt die Ergebnisse als GeoJSON-Datei zurück
+"""
 
 import json
 import os
